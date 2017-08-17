@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use Twig\Extension\AbstractExtension;
 
 class CompileProxyExtensionsPass implements CompilerPassInterface
 {
@@ -32,7 +33,19 @@ class CompileProxyExtensionsPass implements CompilerPassInterface
                     }
                 }
                 $extensionClass = $container->getDefinition($id)->getClass();
+                /** @var AbstractExtension $fakeInstance */
                 $fakeInstance = (new \ReflectionClass($extensionClass))->newInstanceWithoutConstructor();
+                //check there are no token parsers, node visitors or operators defined
+                if (count($fakeInstance->getTokenParsers()) > 0
+                    || count($fakeInstance->getNodeVisitors()) > 0
+                    || count($fakeInstance->getOperators()) > 0
+                ) {
+                    throw new \InvalidArgumentException(sprintf(
+                        'The Twig extension service "%s" should declare only functions, filters'
+                        .' and tests in order to allow proxying.',
+                        $id
+                    ));
+                }
                 //gather functions
                 foreach ($fakeInstance->getFunctions() as $function) {
                     $optionsProperty = (new \ReflectionObject($function))->getProperty('options');
