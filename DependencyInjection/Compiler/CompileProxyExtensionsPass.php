@@ -15,7 +15,9 @@ class CompileProxyExtensionsPass implements CompilerPassInterface
         $groupProxies = [];
         foreach ($container->findTaggedServiceIds('twig.proxied_extension') as $id => $tags) {
             foreach ($tags as $attributes) {
-                $groups = $attributes['groups'] ?? ['default'];
+                $groups = (isset($attributes['groups']))
+                    ? preg_split('/,\s*/', $attributes['groups'])
+                    : ['default'];
                 foreach ($groups as $group) {
                     if (isset($groupProxies[$group])) {
                         continue;
