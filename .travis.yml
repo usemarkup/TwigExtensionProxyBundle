@@ -1,0 +1,16 @@
+language: php
+
+php:
+    - 7.1
+
+before_install:
+    - composer self-update
+
+script:
+    - vendor/bin/phpunit -v
+
+notifications:
+  email: "douglas@usemarkup.com"
+
+sudo: false
+dist: trusty

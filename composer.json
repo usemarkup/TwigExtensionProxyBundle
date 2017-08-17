@@ -1,0 +1,23 @@
+{
+    "name": "markup/twig-extension-proxy-bundle",
+    "description": "A Symfony bundle that can provide lazy access to simpler, more common kinds of registered Twig extensions.",
+    "type": "symfony-bundle",
+    "autoload": {
+        "psr-4": { "Markup\\TwigExtensionProxyBundle\\": "" }
+    },
+    "require": {
+        "twig/twig": "^2",
+        "symfony/framework-bundle": "^2.8|^3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6",
+        "mockery/mockery": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Douglas Greenshields",
+            "email": "douglas@usemarkup.com"
+        }
+    ]
+}

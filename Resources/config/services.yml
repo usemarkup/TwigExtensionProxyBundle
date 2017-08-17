@@ -1,0 +1,11 @@
+services:
+    markup_twig_extension_proxy.abstract_proxy:
+        abstract: true
+        class: Markup\TwigExtensionProxyBundle\ProxyExtension
+        arguments:
+            - '@service_container'
+    markup_twig_extension_proxy.proxy.default:
+        parent: markup_twig_extension_proxy.abstract_proxy
+        tags:
+            - { name: twig.extension }
+
