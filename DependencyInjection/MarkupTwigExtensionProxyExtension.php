@@ -22,6 +22,11 @@ class MarkupTwigExtensionProxyExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter(
+            'markup_twig_extension_proxy.should_proxify_tagged_extensions',
+            $config['proxify_tagged_extensions']
+        );
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }

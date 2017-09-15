@@ -60,3 +60,20 @@ my_extension:
 ```
 
 This custom proxy extension can then be accessed with the service ID `markup_twig_extension_proxy.proxy.custom`. Typically this would then be added to a manually-declared Twig environment.
+
+### Proxying third-party extensions
+
+With the bundle configuration:
+
+```yaml
+markup_twig_extension_proxy:
+    proxify_tagged_extensions: true
+```
+
+an application will opt into converting any service tagged `twig.extension` into a proxied extension instead (if the extension is compatible, otherwise it will be included in the normal manner).
+
+If you are using a version of Symfony prior to Symfony 3.2, you may need to list this bundle right near the top of your Symfony app kernel in order to convert other extensions. (The compiler pass that achieves this has a priority of 100.)
+
+### Known issues
+
+Named arguments are not supported at the current time - unfortunately these are only caught at template compilation time not application compilation time, so please watch out for that!

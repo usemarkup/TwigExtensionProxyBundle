@@ -20,9 +20,14 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('markup_twig_extension_proxy');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->booleanNode('proxify_tagged_extensions')
+                    ->info('Option for proxifying any applicable extensions marked with twig.extension tag.')
+                    ->defaultFalse()
+                ->end()
+            ->end();
 
         return $treeBuilder;
     }
