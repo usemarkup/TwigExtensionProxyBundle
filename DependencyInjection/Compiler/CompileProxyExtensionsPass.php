@@ -86,6 +86,7 @@ class CompileProxyExtensionsPass implements CompilerPassInterface
                     ? preg_split('/,\s*/', $attributes['groups'])
                     : [self::DEFAULT_GROUP];
                 $addFunctorsForId($id, $groups);
+                $container->getDefinition($id)->setPublic(true);
             }
         }
         //optionally proxify applicable extensions if marked with twig.extension tag
