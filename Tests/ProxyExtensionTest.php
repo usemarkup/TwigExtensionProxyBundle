@@ -6,7 +6,6 @@ use Markup\TwigExtensionProxyBundle\ProxyExtension;
 use Mockery as m;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\DependencyInjection\Definition;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\Loader\ArrayLoader;
